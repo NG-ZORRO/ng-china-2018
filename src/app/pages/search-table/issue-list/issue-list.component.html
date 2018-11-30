@@ -1,0 +1,44 @@
+<nz-table
+  #ajaxTable
+  nzShowSizeChanger
+  autoHeight
+  [offsetY]="140"
+  [nzFrontPagination]="false"
+  [nzData]="(dataSet$ | async)?.items"
+  [nzLoading]="(loading$ | async)"
+  [nzTotal]="(dataSet$ | async)?.total_count"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  (nzPageIndexChange)="loadData()"
+  (nzPageSizeChange)="loadData(true)">
+  <thead>
+    <tr>
+      <th nzThResize nzWidth="500px">标题</th>
+      <th><span>标签</span></th>
+      <th nzWidth="80px"><span>指派</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of ajaxTable.data">
+      <td>
+        <p class="issue-title">
+          <i class="issue-state" [class.open]="data.state === 'open'"
+            nz-icon [type]="data.state === 'open' ? 'info-circle' : 'check-circle'" theme="outline">
+          </i>
+          {{data.title}}
+        </p>
+        <span class="issue-info">
+          #{{data.number}} {{data.user.login}} 更新于 {{data.updated_at | date}}
+        </span>
+        </td>
+      <td>
+        <app-issue-label [labels]="data.labels"></app-issue-label>
+      </td>
+      <td>
+        <ng-container *ngIf="data.assignees.length">
+          <nz-avatar [nzText]="data.assignees[0].login" [nzSrc]="data.assignees[0].avatar_url"></nz-avatar>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

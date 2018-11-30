@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BasicTableComponent } from './basic-table/basic-table.component';
-import { SearchTableComponent } from './search-table/search-table.component';
+import { BasicTableComponent } from './pages/basic-table/basic-table.component';
+import { SearchTableComponent } from './pages/search-table/search-table.component';
 
 const routes: Routes = [
   {

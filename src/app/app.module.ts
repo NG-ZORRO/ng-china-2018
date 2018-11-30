@@ -9,8 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { SearchTableComponent } from './search-table/search-table.component';
-import { BasicTableComponent } from './basic-table/basic-table.component';
+import { IssueLabelComponent } from './pages/search-table/issue-label/issue-label.component';
+import { IssueListComponent } from './pages/search-table/issue-list/issue-list.component';
+import { SearchTableComponent } from './pages/search-table/search-table.component';
+import { BasicTableComponent } from './pages/basic-table/basic-table.component';
+import { ShareModule } from './share/share.module';
 
 registerLocaleData(zh);
 
@@ -18,7 +21,9 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     SearchTableComponent,
-    BasicTableComponent
+    BasicTableComponent,
+    IssueListComponent,
+    IssueLabelComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,8 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    ShareModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
