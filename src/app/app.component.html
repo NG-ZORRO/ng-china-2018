@@ -1,0 +1,40 @@
+<nz-layout>
+  <nz-sider nzCollapsible
+    [nzWidth]="256"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="triggerTemplate">
+    <div class="logo">
+    </div>
+    <ul nz-menu
+      [nzTheme]="'dark'"
+      [nzMode]="'inline'"
+      [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu
+        [nzOpen]="true">
+        <span title>
+          <i nz-icon type="table" theme="outline"></i>
+          <span class="nav-text">List</span>
+        </span>
+        <ul>
+          <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+            <a [routerLink]="['./search-table']">Search Table</a>
+          </li>
+          <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+            <a [routerLink]="['./basic-table']">Basic List</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+  <i nz-icon type="up"></i>
+</ng-template>
