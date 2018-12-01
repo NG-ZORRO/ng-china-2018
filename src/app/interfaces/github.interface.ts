@@ -106,3 +106,5 @@ declare namespace github {
     site_admin: boolean;
   }
 }
+
+// TODO: add labels interface

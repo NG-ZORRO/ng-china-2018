@@ -16,6 +16,7 @@ export class GithubService {
 
   searchIssues(page = 1, pageSize = 20) {
     this.loading$.next(true);
+    // TODO: modify this to support query params
     this.http.get<github.Search>(`${this.API_URL}?q=repo%3Ang-zorro/ng-zorro-antd&page=${page}&per_page=${pageSize}`)
     .subscribe(data => {
       this.issues$.next(data);
