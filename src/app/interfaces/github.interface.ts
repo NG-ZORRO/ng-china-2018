@@ -105,6 +105,11 @@ declare namespace github {
     type: string;
     site_admin: boolean;
   }
-}
 
-// TODO: add labels interface
+  export interface IssueQueryParams {
+    repo?: string;
+    label?: string;
+    state?: 'close' | 'open';
+    updated?: Date;
+  }
+}

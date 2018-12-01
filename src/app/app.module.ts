@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
@@ -13,6 +13,7 @@ import { IssueLabelComponent } from './pages/search-table/issue-label/issue-labe
 import { IssueListComponent } from './pages/search-table/issue-list/issue-list.component';
 import { SearchTableComponent } from './pages/search-table/search-table.component';
 import { BasicTableComponent } from './pages/basic-table/basic-table.component';
+import { IssueFormComponent } from './pages/search-table/issue-form/issue-form.component';
 import { ShareModule } from './share/share.module';
 
 registerLocaleData(zh);
@@ -23,18 +24,20 @@ registerLocaleData(zh);
     SearchTableComponent,
     BasicTableComponent,
     IssueListComponent,
-    IssueLabelComponent
+    IssueLabelComponent,
+    IssueFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgZorroAntdModule,
     ShareModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
-  bootstrap: [AppComponent]
+  providers: [ { provide: NZ_I18N, useValue: zh_CN } ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

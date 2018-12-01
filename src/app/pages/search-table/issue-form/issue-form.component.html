@@ -1,0 +1,54 @@
+<form nz-form
+      [formGroup]="formGroup"
+      (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label nzRequired
+                   nzSpan="4">仓库</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <input nz-input
+             formControlName="repo">
+    </nz-form-control>
+    <ng-container *ngIf="advancedSearch">
+      <nz-form-label nzSpan="4">状态</nz-form-label>
+      <nz-form-control nzSpan="3">
+        <nz-select formControlName="state"
+                   style="width: 120px;">
+          <nz-option *ngFor="let op of stateOptions"
+                     [nzLabel]="op"
+                     [nzValue]="op"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </ng-container>
+  </nz-form-item>
+  <ng-container *ngIf="advancedSearch">
+    <nz-form-item>
+      <nz-form-label nzSpan="4">Label</nz-form-label>
+      <nz-form-control nzSpan="4">
+        <input nz-input
+               formControlName="label">
+      </nz-form-control>
+      <nz-form-label nzSpan="4">在此之后更新</nz-form-label>
+      <nz-form-control nzSpan="3">
+        <nz-date-picker formControlName="updated"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <nz-form-item>
+    <nz-form-control nzOffset="4"
+                     nzSpan="8">
+      <span class="action-panel"
+            style="display: block; padding-top: 4px; margin-bottom: 24px;">
+        <button nz-button
+                nzType="primary"
+                type="submit">
+          <i nz-icon
+             [type]="(loading$ | async) ? 'loading' : 'search'"></i></button>
+        <button nz-button
+                type="button"
+                (click)="onResetButtonClick()">Reset</button>
+        <a (click)="onToggleAdvanced()">{{ advancedSearch ? 'Show Less' : 'Show More' }} <i nz-icon
+             [type]="advancedSearch ? 'up' : 'down'"></i></a>
+      </span>
+    </nz-form-control>
+  </nz-form-item>
+</form>
