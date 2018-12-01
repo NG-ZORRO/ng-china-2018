@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { GithubService } from '../../../services/github.service';
 import { FormService } from '../../../services/form.service';
+
+const inputRE = /^([a-zA-Z0-9\-\_\s\,\/])+$/;
 
 @Component({
   selector: 'app-issue-form',
@@ -47,10 +49,15 @@ export class IssueFormComponent implements OnInit {
     this.formGroup.get('labels').setValue([]);
   }
 
+  disabledDate = (current: Date): boolean => {
+    const today = new Date;
+    today.setHours(23, 59, 59, 0);
+    return current.getTime() >= today.getTime();
+  }
+
   private createForm(): void {
-    // TODO: create form here
     this.formGroup = this.fb.group({
-      repo: [ 'ng-zorro/ng-zorro-antd' ],
+      repo: [ 'ng-zorro/ng-zorro-antd', [ Validators.required, Validators.pattern(inputRE) ] ],
       state: [ 'open/close' ],
       label: [ '' ],
       updated: []

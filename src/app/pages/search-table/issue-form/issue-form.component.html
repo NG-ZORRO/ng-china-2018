@@ -4,9 +4,14 @@
   <nz-form-item>
     <nz-form-label nzRequired
                    nzSpan="4">仓库</nz-form-label>
-    <nz-form-control nzSpan="4">
+    <nz-form-control nzSpan="4"
+                     nzHasFeedback>
       <input nz-input
              formControlName="repo">
+      <nz-form-explain *ngIf="formGroup.get('repo').errors && formGroup.get('repo').dirty">
+        <span *ngIf="formGroup.get('repo').errors.required">必填字段</span>
+        <span *ngIf="formGroup.get('repo').errors.pattern">含有非法字符</span>
+      </nz-form-explain>
     </nz-form-control>
     <ng-container *ngIf="advancedSearch">
       <nz-form-label nzSpan="4">状态</nz-form-label>
@@ -29,7 +34,8 @@
       </nz-form-control>
       <nz-form-label nzSpan="4">在此之后更新</nz-form-label>
       <nz-form-control nzSpan="3">
-        <nz-date-picker formControlName="updated"></nz-date-picker>
+        <nz-date-picker formControlName="updated"
+                        [nzDisabledDate]="disabledDate"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
   </ng-container>
