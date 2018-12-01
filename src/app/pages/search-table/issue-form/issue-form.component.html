@@ -4,7 +4,7 @@
   <nz-form-item>
     <nz-form-label nzRequired
                    nzSpan="4">仓库</nz-form-label>
-    <nz-form-control nzSpan="4"
+    <nz-form-control nzSpan="8"
                      nzHasFeedback>
       <input nz-input
              formControlName="repo"
@@ -16,9 +16,8 @@
     </nz-form-control>
     <ng-container *ngIf="advancedSearch">
       <nz-form-label nzSpan="4">状态</nz-form-label>
-      <nz-form-control nzSpan="3">
-        <nz-select formControlName="state"
-                   style="width: 120px;">
+      <nz-form-control nzSpan="8">
+        <nz-select formControlName="state">
           <nz-option *ngFor="let op of stateOptions"
                      [nzLabel]="op"
                      [nzValue]="op"></nz-option>
@@ -29,7 +28,7 @@
   <ng-container *ngIf="advancedSearch">
     <nz-form-item>
       <nz-form-label nzSpan="4">Label</nz-form-label>
-      <nz-form-control nzSpan="4">
+      <nz-form-control nzSpan="8">
         <nz-select formControlName="label">
           <nz-option *ngFor="let op of labelOptions"
                      [nzLabel]="op.name"
@@ -38,7 +37,7 @@
         </nz-select>
       </nz-form-control>
       <nz-form-label nzSpan="4">更新日期</nz-form-label>
-      <nz-form-control nzSpan="3">
+      <nz-form-control nzSpan="8">
         <nz-date-picker formControlName="updated"
                         [nzDisabledDate]="disabledDate"></nz-date-picker>
       </nz-form-control>
