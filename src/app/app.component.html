@@ -4,6 +4,8 @@
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="triggerTemplate">
     <div class="logo">
+      <img src="../assets/img/logo.svg">
+      <span *ngIf="!isCollapsed" class="logo-text">NG ZORRO</span>
     </div>
     <ul nz-menu
       [nzTheme]="'dark'"
@@ -22,6 +24,9 @@
           <li nz-menu-item routerLinkActive="ant-menu-item-selected">
             <a [routerLink]="['./basic-table']">Basic List</a>
           </li>
+          <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+            <a [routerLink]="['./theme-demo']">Theme Demo</a>
+          </li>
         </ul>
       </li>
     </ul>
@@ -29,6 +34,16 @@
   <nz-layout>
     <nz-header>
       <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
+      <span class="theme">
+        <nz-dropdown nzPlacement="bottomRight">
+          <i nz-dropdown nz-icon type="bg-colors" [style.color]="bgColor"></i>
+          <ul nz-menu>
+            <li nz-menu-item *ngFor="let color of colorList" (click)="changeTheme(color.color)">
+              <span class="color-option" [style.background-color]="color.color"></span> {{color.key.toUpperCase()}}
+            </li>
+          </ul>
+        </nz-dropdown>
+      </span>
     </nz-header>
     <nz-content>
       <router-outlet></router-outlet>

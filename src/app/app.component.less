@@ -1,12 +1,22 @@
+@import "../theme";
+
 nz-layout {
   height: 100vh;
 }
 
-nz-header {
+nz-layout nz-header {
   background: #fff;
   padding: 0;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
   z-index: 1;
+  .theme {
+    position: absolute;
+    right: 24px;
+    [nz-icon] {
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
 }
 
 nz-content {
@@ -29,6 +39,18 @@ nz-content {
 
 .logo {
   height: 32px;
-  background: rgba(255, 255, 255, .2);
   margin: 16px;
+  img {
+    height: 32px;
+    width: 32px;
+    margin-left: 8px;
+  }
+  .logo-text {
+    cursor: pointer;
+    vertical-align: middle;
+    font-size: 20px;
+    padding-left: 8px;
+    font-weight: 500;
+    color: @primary-color;
+  }
 }
