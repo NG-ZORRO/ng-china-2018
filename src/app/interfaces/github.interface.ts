@@ -105,7 +105,6 @@ declare namespace github {
     type: string;
     site_admin: boolean;
   }
-
   export interface IssueQueryParams {
     repo?: string;
     label?: string;
