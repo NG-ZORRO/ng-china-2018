@@ -108,7 +108,7 @@ declare namespace github {
   export interface IssueQueryParams {
     repo?: string;
     label?: string;
-    state?: 'close' | 'open';
+    state?: 'closed' | 'open';
     updated?: Date;
   }
 }

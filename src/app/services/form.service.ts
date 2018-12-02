@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-export type IssueStates = 'open/close' | 'open' | 'close';
+export type IssueStates = 'open/closed' | 'open' | 'closed';
 
 const spaceRE = /\s/;
 
@@ -42,6 +42,6 @@ export class FormService {
   }
 
   private parseState(state: IssueStates): string {
-    return state === 'open/close' ? '' : `state:${state}`;
+    return state === 'open/closed' ? '' : `state:${state}`;
   }
 }

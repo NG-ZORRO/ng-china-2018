@@ -30,6 +30,7 @@
       <nz-form-label nzSpan="4">Label</nz-form-label>
       <nz-form-control nzSpan="8">
         <nz-select formControlName="label">
+          <nz-option [nzLabel]="'(空)'" [nzValue]="''"></nz-option>
           <nz-option *ngFor="let op of labelOptions"
                      [nzLabel]="op.name"
                      [nzValue]="op.name">

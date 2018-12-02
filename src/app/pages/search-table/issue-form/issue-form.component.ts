@@ -17,7 +17,7 @@ export class IssueFormComponent implements OnInit {
 
   advancedSearch = false;
   formGroup: FormGroup;
-  stateOptions = [ 'open/close', 'open', 'close' ];
+  stateOptions = [ 'open/closed', 'open', 'closed' ];
   labelOptions: github.LabelsItem[] = [];
   repoInput$ = new Subject<string>();
   loading$: Observable<boolean>;
@@ -64,8 +64,8 @@ export class IssueFormComponent implements OnInit {
 
   onResetButtonClick(): void {
     this.formGroup.reset();
-    this.formGroup.get('repo').setValue('ng-zorro');
-    this.formGroup.get('state').setValue('open/close');
+    this.formGroup.get('repo').setValue('ng-zorro/ng-zorro-antd');
+    this.formGroup.get('state').setValue('open/closed');
     this.formGroup.get('label').setValue([]);
   }
 
@@ -82,7 +82,7 @@ export class IssueFormComponent implements OnInit {
   private createForm(): void {
     this.formGroup = this.fb.group({
       repo   : [ 'ng-zorro/ng-zorro-antd', [ Validators.required, Validators.pattern(inputRE) ] ],
-      state  : [ 'open/close' ],
+      state  : [ 'open/closed' ],
       label  : [ '' ],
       updated: []
     });
