@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject, from } from 'rxjs';
+import { debounceTime, distinctUntilChanged, mergeMap, concatAll, filter } from 'rxjs/operators';
 
 import { GithubService } from '../../../services/github.service';
 import { FormService } from '../../../services/form.service';
@@ -17,7 +18,8 @@ export class IssueFormComponent implements OnInit {
   advancedSearch = false;
   formGroup: FormGroup;
   stateOptions = [ 'open/close', 'open', 'close' ];
-
+  labelOptions: github.LabelsItem[] = [];
+  repoInput$ = new Subject<string>();
   loading$: Observable<boolean>;
 
   constructor(
@@ -29,11 +31,23 @@ export class IssueFormComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.loading$ = this.gitHubService.loading$.asObservable();
+    this.repoInput$.pipe(
+      filter(() => this.advancedSearch),
+      debounceTime(700),
+      distinctUntilChanged(),
+      mergeMap((repoString: string) => {
+        return from(repoString
+          .split(',')
+          .map(i => i.trim())
+          .map(i => this.gitHubService.searchLabels(i))).pipe(concatAll());
+      }),
+    ).subscribe(labelOb => {
+      this.labelOptions = labelOb;
+    });
   }
 
   onSubmit(): void {
     const queryString = this.formService.parseParams(this.formGroup.value as github.IssueQueryParams, this.advancedSearch);
-    console.log(queryString);
     this.gitHubService.query = queryString;
     this.gitHubService.searchIssues();
   }
@@ -44,9 +58,13 @@ export class IssueFormComponent implements OnInit {
 
   onResetButtonClick(): void {
     this.formGroup.reset();
-    this.formGroup.get('repository').setValue('ng-zorro');
+    this.formGroup.get('repo').setValue('ng-zorro');
     this.formGroup.get('state').setValue('open/close');
-    this.formGroup.get('labels').setValue([]);
+    this.formGroup.get('label').setValue([]);
+  }
+
+  onRepoChange(input: string) {
+    this.repoInput$.next(input);
   }
 
   disabledDate = (current: Date): boolean => {

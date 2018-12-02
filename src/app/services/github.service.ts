@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class GithubService {
 
   API_URL = 'https://api.github.com/search/issues';
+  PREFIX = 'https://api.github.com';
   query: string;
 
   readonly issues$ = new Subject<github.Search>();
@@ -27,4 +28,7 @@ export class GithubService {
       });
   }
 
+  searchLabels(repos: string): Observable<github.LabelsItem[]> {
+    return this.http.get<github.LabelsItem[]>(`${this.PREFIX}/repos/${repos}/labels`);
+  }
 }

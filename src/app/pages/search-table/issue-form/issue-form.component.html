@@ -7,7 +7,8 @@
     <nz-form-control nzSpan="4"
                      nzHasFeedback>
       <input nz-input
-             formControlName="repo">
+             formControlName="repo"
+             (ngModelChange)="onRepoChange($event)">
       <nz-form-explain *ngIf="formGroup.get('repo').errors && formGroup.get('repo').dirty">
         <span *ngIf="formGroup.get('repo').errors.required">必填字段</span>
         <span *ngIf="formGroup.get('repo').errors.pattern">含有非法字符</span>
@@ -29,10 +30,14 @@
     <nz-form-item>
       <nz-form-label nzSpan="4">Label</nz-form-label>
       <nz-form-control nzSpan="4">
-        <input nz-input
-               formControlName="label">
+        <nz-select formControlName="label">
+          <nz-option *ngFor="let op of labelOptions"
+                     [nzLabel]="op.name"
+                     [nzValue]="op.name">
+          </nz-option>
+        </nz-select>
       </nz-form-control>
-      <nz-form-label nzSpan="4">在此之后更新</nz-form-label>
+      <nz-form-label nzSpan="4">更新日期</nz-form-label>
       <nz-form-control nzSpan="3">
         <nz-date-picker formControlName="updated"
                         [nzDisabledDate]="disabledDate"></nz-date-picker>
@@ -51,8 +56,8 @@
              [type]="(loading$ | async) ? 'loading' : 'search'"></i></button>
         <button nz-button
                 type="button"
-                (click)="onResetButtonClick()">Reset</button>
-        <a (click)="onToggleAdvanced()">{{ advancedSearch ? 'Show Less' : 'Show More' }} <i nz-icon
+                (click)="onResetButtonClick()">重置</button>
+        <a (click)="onToggleAdvanced()">{{ advancedSearch ? '展示更少' : '展示更多' }} <i nz-icon
              [type]="advancedSearch ? 'up' : 'down'"></i></a>
       </span>
     </nz-form-control>
